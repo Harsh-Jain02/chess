@@ -1,0 +1,105 @@
+/* Design tokens and page layout. The other stylesheets use these custom properties. */
+
+:root {
+  /* Colors */
+  --color-page-bg: #f4f1ea;
+  --color-text: #222222;
+  --color-placeholder: #9a948a;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+
+  /* Sizes */
+  --board-size: min(92vw, 70vh, 640px);
+  --panel-min-width: 12rem;
+  --panel-max-width: 20rem;
+  --region-min-height: 2.5rem;
+
+  --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: var(--space-m);
+  font-family: var(--font-family);
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-page-bg);
+}
+
+h1 {
+  margin: 0 0 var(--space-m);
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+/* Narrow screens (the default): one column of status, board, captured, controls. */
+.layout {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: minmax(0, var(--board-size));
+  grid-template-areas:
+    "status"
+    "board"
+    "captured-w"
+    "captured-b"
+    "controls";
+  justify-content: center;
+}
+
+#status { grid-area: status; }
+#captured-by-w { grid-area: captured-w; }
+#captured-by-b { grid-area: captured-b; }
+#controls { grid-area: controls; }
+
+#status,
+#captured-by-w,
+#captured-by-b,
+#controls {
+  min-height: var(--region-min-height);
+}
+
+#board {
+  grid-area: board;
+  width: var(--board-size);
+  max-width: 100%; /* never wider than its column, so the page can't scroll sideways */
+  aspect-ratio: 1;
+}
+
+/*
+ * Wide screens: board on the left, side panel (status, captured, controls) on the right.
+ * The board column gives way first, so the panel keeps at least --panel-min-width.
+ * 700px is the breakpoint from docs/ARCHITECTURE.md (media queries can't read custom properties).
+ */
+@media (min-width: 700px) {
+  .layout {
+    grid-template-columns: minmax(0, var(--board-size)) minmax(var(--panel-min-width), 1fr);
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+      "board status"
+      "board captured-w"
+      "board captured-b"
+      "board controls";
+    align-items: start;
+    max-width: calc(var(--board-size) + var(--space-m) + var(--panel-max-width));
+    margin-inline: auto;
+  }
+}
+
+/* Placeholder outlines until later tasks fill the regions (board T08, status T13, controls T14, captured T16). */
+#status,
+#board,
+#captured-by-w,
+#captured-by-b,
+#controls {
+  outline: 1px dashed var(--color-placeholder);
+}

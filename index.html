@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chess</title>
+  <!-- Reminder: empty icon so the browser doesn't request favicon.ico (a 404). Replace with a real icon later if wanted. -->
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/board.css">
+  <link rel="stylesheet" href="css/controls.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <header class="page-header">
+    <h1>Chess</h1>
+  </header>
+  <main class="layout">
+    <div id="status" aria-live="polite"></div>
+    <div id="board"></div>
+    <div id="captured-by-w"></div>
+    <div id="captured-by-b"></div>
+    <div id="controls"></div>
+  </main>
+  <dialog id="promotion-dialog"></dialog>
+  <footer id="credits"></footer>
+</body>
+</html>
