@@ -83,7 +83,7 @@
  */
 
 /**
- * Returned by `createGame`. T05 adds `move`, `undo`, `history` and `moveList`.
+ * Returned by `createGame` and `replayGame`.
  * @typedef {object} Game
  * @property {() => Color} turn
  * @property {() => string} fen
@@ -91,6 +91,10 @@
  * @property {(from: Square) => Target[]} legalTargets
  * @property {(color: Color) => Square} kingSquare
  * @property {() => Flags} flags
+ * @property {(input: MoveInput) => MoveRecord | null} move `null` if illegal; never throws
+ * @property {() => MoveRecord | null} undo takes back the last move; `null` if there is none
+ * @property {() => MoveRecord[]} history oldest first
+ * @property {() => string[]} moveList in LAN, oldest first, e.g. `['e2e4', 'e7e5']`
  */
 
 export {};

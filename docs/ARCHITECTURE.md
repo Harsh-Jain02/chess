@@ -101,7 +101,7 @@ Import (only in `js/engine/game.js`): `import { Chess } from '../../vendor/chess
 | `.fen()` | FEN string of the current position |
 | `.get(square)` | `{ type, color }`, or **`undefined`** if empty (the adapter returns `null`) |
 | `.moves({ square, verbose: true })` | Array of `Move` objects with `from, to, piece, color, captured?, promotion?, san, lan` |
-| `.move({ from, to, promotion })` | `Move` if legal. **Throws** if illegal (the adapter catches it and returns `null`) |
+| `.move({ from, to, promotion })` | `Move` if legal. **Throws** if illegal (the adapter checks the move against its legal targets first and returns `null` instead) |
 | `.undo()` | `Move` that was taken back, or `null` |
 | `.history({ verbose: true })` | Array of `Move`, oldest first |
 | `.findPiece({ type: 'k', color })` | Array of squares, e.g. `['e1']` |
@@ -114,4 +114,6 @@ Gotchas:
 - **Promotions:** `moves()` returns **four** moves for one promotion (`q`, `r`, `b`, `n`), all with the same `to`. The adapter merges them into one target.
 - **En passant:** `Move.isCapture()` is **false** for an en passant capture, but `move.captured` is `'p'`. Detect captures with `captured !== undefined`.
 - **LAN:** `lan` includes the promotion piece, e.g. `'e7e8q'`. This is the format used for saved games.
+- **`move()` is lenient:** it ignores a `promotion` piece on a move that isn't a promotion, plays a "null move" (passes the turn) for `move(null)`, and reads strings as SAN. The adapter refuses all three and only passes an object it built.
+- **`Move` fields:** `captured` and `promotion` are always own properties, `undefined` when unused. A `MoveRecord` leaves them out instead.
 - Don't hand chess.js `Move` instances to the rest of the app. Copy the fields into plain `MoveRecord` objects.
