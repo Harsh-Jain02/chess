@@ -1,0 +1,59 @@
+# Runs `npm run check` on every push to main and every pull request, and deploys
+# the site to GitHub Pages only when a push to main passes (DECISIONS D11, task T03).
+name: Check and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      # No `npm install` / `npm ci`: the project has no dependencies.
+      - name: Run tests and file-size check
+        run: npm run check
+
+  deploy:
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # Job permissions replace the workflow's, so checkout needs contents: read again.
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
+      # Only site files go live: never docs/, tests/, scripts/ or Markdown files.
+      - name: Build _site from site files only
+        run: |
+          if [ ! -f index.html ]; then
+            echo "::error::index.html is missing"
+            exit 1
+          fi
+          mkdir _site
+          for path in index.html css js vendor assets; do
+            if [ -e "$path" ]; then cp -R "$path" _site/; fi
+          done
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v5

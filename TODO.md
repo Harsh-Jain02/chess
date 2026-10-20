@@ -31,7 +31,7 @@ Answer these before starting the linked task: write the answer after the questio
 
 - [x] [T01](docs/tasks/T01-tooling.md) package.json + file-size check · deps: none
 - [x] [T02](docs/tasks/T02-page-shell.md) Page shell: index.html, base CSS, entry module · deps: none
-- [ ] [T03](docs/tasks/T03-ci-deploy.md) GitHub Actions: test, then deploy · deps: T01, T02
+- [x] [T03](docs/tasks/T03-ci-deploy.md) GitHub Actions: test, then deploy · deps: T01, T02
 
 ## Phase 2: rules engine (pure JS, unit-tested)
 
