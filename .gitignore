@@ -1,0 +1,13 @@
+# Dependencies (none expected; see AGENTS.md hard rule 2)
+node_modules/
+
+# Folder the CI workflow builds for the GitHub Pages upload
+_site/
+
+# Personal Claude Code overrides (shared settings live in .claude/settings.json)
+.claude/settings.local.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log
