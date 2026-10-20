@@ -22,7 +22,7 @@ Answer these before starting the linked task: write the answer after the questio
 ## Phase 0: owner setup ([owner-tasks.md](docs/tasks/owner-tasks.md))
 
 - [x] O1 git init, first commit, create public GitHub repo, push · *do first*
-- [ ] O2 Add chess.js 1.4.0 to `vendor/` · *before T04*
+- [x] O2 Add chess.js 1.4.0 to `vendor/` · *before T04*
 - [ ] O3 Add piece SVGs to `assets/pieces/` · *before T08*
 - [ ] O4 Turn on GitHub Pages (source: GitHub Actions) · *after T03*
 - [ ] O5 Decide the project license · *not blocking*
