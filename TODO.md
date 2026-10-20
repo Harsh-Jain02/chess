@@ -35,7 +35,7 @@ Answer these before starting the linked task: write the answer after the questio
 
 ## Phase 2: rules engine (pure JS, unit-tested)
 
-- [ ] [T04](docs/tasks/T04-engine-queries.md) Engine adapter: position queries and legal targets · deps: O2, T01
+- [x] [T04](docs/tasks/T04-engine-queries.md) Engine adapter: position queries and legal targets · deps: O2, T01
 - [ ] [T05](docs/tasks/T05-engine-moves.md) Engine adapter: move, undo, replay · deps: T04
 - [ ] [T06](docs/tasks/T06-game-status.md) Game status: check, checkmate, draws · deps: T05
 - [ ] [T07](docs/tasks/T07-captures-logic.md) Captured pieces logic · deps: T05
