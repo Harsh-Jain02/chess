@@ -21,7 +21,7 @@ Answer these before starting the linked task: write the answer after the questio
 
 ## Phase 0: owner setup ([owner-tasks.md](docs/tasks/owner-tasks.md))
 
-- [ ] O1 git init, first commit, create public GitHub repo, push · *do first*
+- [x] O1 git init, first commit, create public GitHub repo, push · *do first*
 - [ ] O2 Add chess.js 1.4.0 to `vendor/` · *before T04*
 - [ ] O3 Add piece SVGs to `assets/pieces/` · *before T08*
 - [ ] O4 Turn on GitHub Pages (source: GitHub Actions) · *after T03*
@@ -29,7 +29,7 @@ Answer these before starting the linked task: write the answer after the questio
 
 ## Phase 1: tooling and page shell
 
-- [ ] [T01](docs/tasks/T01-tooling.md) package.json + file-size check · deps: none
+- [x] [T01](docs/tasks/T01-tooling.md) package.json + file-size check · deps: none
 - [ ] [T02](docs/tasks/T02-page-shell.md) Page shell: index.html, base CSS, entry module · deps: none
 - [ ] [T03](docs/tasks/T03-ci-deploy.md) GitHub Actions: test, then deploy · deps: T01, T02
 
