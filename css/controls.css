@@ -1,4 +1,9 @@
-/* Side panel: buttons (T14, T15), captured pieces (T16) and the promotion dialog (T12). */
+/* Side panel: status line (T13), buttons (T14, T15), captured pieces (T16) and the promotion dialog (T12). */
+
+/* The status line turns bold once the game is over (checkmate or a draw). */
+#status.is-over {
+  font-weight: bold;
+}
 
 /*
  * Promotion dialog: four piece buttons in a row, then Cancel. The dialog is never wider

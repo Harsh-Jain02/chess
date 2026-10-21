@@ -1,12 +1,13 @@
 // App state and event handlers: turns clicks on the board into moves (asking which
-// piece a pawn promotes to), then redraws the board with its move highlights. Later
-// tasks add the status line (T13), the buttons (T14, T15), captured pieces (T16) and
+// piece a pawn promotes to), then redraws the board with its move highlights and the
+// status line. Later tasks add the buttons (T14, T15), captured pieces (T16) and
 // saving (T18).
 
 import { getStatus } from './engine/status.js';
 import { cancelPromotion, choosePromotion, clickSquare, emptySelection } from './state/selection.js';
 import { renderBoard } from './ui/board-view.js';
 import { askPromotion } from './ui/promotion-dialog.js';
+import { renderStatus } from './ui/status-view.js';
 
 /** @typedef {import('./state/selection.js').ClickResult} ClickResult */
 /** @typedef {import('./types.js').Color} Color */
@@ -45,13 +46,15 @@ export function createController({ elements, game, orientation }) {
 
   function render() {
     const { selected, targets } = state.selection;
+    const status = getStatus(state.game);
     renderBoard(elements.board, {
       game: state.game,
       orientation: state.orientation,
       selected,
       targets,
-      checkSquare: getStatus(state.game).checkSquare,
+      checkSquare: status.checkSquare,
     });
+    renderStatus(elements.status, status);
   }
 
   /** @param {Square} square */

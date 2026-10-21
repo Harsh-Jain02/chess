@@ -47,7 +47,7 @@ Answer these before starting the linked task: write the answer after the questio
 - [x] [T10](docs/tasks/T10-wire-moves.md) Wire clicks to moves · deps: T06, T08, T09
 - [x] [T11](docs/tasks/T11-highlights.md) Move guidance highlights · deps: T10
 - [x] [T12](docs/tasks/T12-promotion-dialog.md) Promotion dialog · deps: T11
-- [ ] [T13](docs/tasks/T13-status-view.md) Status line and game over · deps: T10
+- [x] [T13](docs/tasks/T13-status-view.md) Status line and game over · deps: T10
 
 ## Phase 4: controls and features
 

@@ -107,8 +107,7 @@ h1 {
   }
 }
 
-/* Placeholder outlines until later tasks fill the regions (status T13, controls T14, captured T16). */
-#status,
+/* Placeholder outlines until later tasks fill the regions (controls T14, captured T16). */
 #captured-by-w,
 #captured-by-b,
 #controls {
