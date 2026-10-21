@@ -43,6 +43,7 @@
   color: var(--color-text);
   background: var(--color-square-light);
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .control-button:hover {
@@ -81,12 +82,14 @@
 
 .promotion-choice {
   min-width: 0;
+  min-height: var(--button-min-height);
   aspect-ratio: 1;
   padding: var(--space-xs);
   border: 0;
   border-radius: var(--radius);
   background: var(--color-square-light);
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .promotion-choice:hover {
@@ -101,7 +104,9 @@
 
 .promotion-cancel {
   display: block;
+  min-height: var(--button-min-height);
   margin: var(--space-m) auto 0;
   padding: var(--space-xs) var(--space-m);
   font: inherit;
+  touch-action: manipulation;
 }

@@ -16,6 +16,7 @@
   border: 0;
   border-radius: 0;
   font: inherit;
+  touch-action: manipulation;
 }
 
 /* Each square's text color is the other square color, so coordinates show on both. */
