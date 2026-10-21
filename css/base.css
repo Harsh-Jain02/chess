@@ -5,6 +5,8 @@
   --color-page-bg: #f4f1ea;
   --color-text: #222222;
   --color-placeholder: #9a948a;
+  --color-square-light: #f0d9b5;
+  --color-square-dark: #b58863;
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -17,6 +19,8 @@
   --panel-min-width: 12rem;
   --panel-max-width: 20rem;
   --region-min-height: 2.5rem;
+  --piece-size: 90%; /* of a square */
+  --coord-font-size: clamp(0.55rem, 2.6cqi, 0.85rem); /* cqi: % of the board width */
 
   --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -95,9 +99,8 @@ h1 {
   }
 }
 
-/* Placeholder outlines until later tasks fill the regions (board T08, status T13, controls T14, captured T16). */
+/* Placeholder outlines until later tasks fill the regions (status T13, controls T14, captured T16). */
 #status,
-#board,
 #captured-by-w,
 #captured-by-b,
 #controls {
