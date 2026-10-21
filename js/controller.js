@@ -1,11 +1,14 @@
-// App state and event handlers: turns clicks on the board into moves, then redraws
-// the board with its move highlights. Later tasks add the promotion dialog (T12), the
-// status line (T13), the buttons (T14, T15), captured pieces (T16) and saving (T18).
+// App state and event handlers: turns clicks on the board into moves (asking which
+// piece a pawn promotes to), then redraws the board with its move highlights. Later
+// tasks add the status line (T13), the buttons (T14, T15), captured pieces (T16) and
+// saving (T18).
 
 import { getStatus } from './engine/status.js';
-import { clickSquare, emptySelection } from './state/selection.js';
+import { cancelPromotion, choosePromotion, clickSquare, emptySelection } from './state/selection.js';
 import { renderBoard } from './ui/board-view.js';
+import { askPromotion } from './ui/promotion-dialog.js';
 
+/** @typedef {import('./state/selection.js').ClickResult} ClickResult */
 /** @typedef {import('./types.js').Color} Color */
 /** @typedef {import('./types.js').Game} Game */
 /** @typedef {import('./types.js').Selection} Selection */
@@ -52,13 +55,26 @@ export function createController({ elements, game, orientation }) {
   }
 
   /** @param {Square} square */
-  function onSquareClick(square) {
+  async function onSquareClick(square) {
     const status = getStatus(state.game);
-    const { selection, move } = clickSquare(state.selection, square, state.game, status.isOver);
-    state.selection = selection;
-    // A pending promotion just waits here until T12 adds the dialog.
+    let result = clickSquare(state.selection, square, state.game, status.isOver);
+    if (result.selection.pendingPromotion) result = await completePromotion(result.selection);
+    state.selection = result.selection;
+    const { move } = result;
     if (move && !state.game.move(move)) console.warn('Move refused by the engine:', move);
     render();
+  }
+
+  /**
+   * Asks which piece the pawn becomes. Meanwhile the board still shows the pawn
+   * selected, and the dialog is modal, so no other click can get in.
+   * @param {Selection} selection with a pendingPromotion
+   * @returns {Promise<ClickResult>} the promotion move, or no move if cancelled
+   */
+  async function completePromotion(selection) {
+    const pieceType = await askPromotion(elements.promotionDialog, state.game.turn());
+    if (pieceType) return choosePromotion(selection, pieceType);
+    return { selection: cancelPromotion(selection), move: null };
   }
 
   // One listener for all 64 squares: they are redrawn on every render.

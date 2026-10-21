@@ -1,1 +1,58 @@
 /* Side panel: buttons (T14, T15), captured pieces (T16) and the promotion dialog (T12). */
+
+/*
+ * Promotion dialog: four piece buttons in a row, then Cancel. The dialog is never wider
+ * than the screen minus a margin, and the buttons shrink to fit, down to a 320px screen.
+ */
+#promotion-dialog {
+  max-width: calc(100vw - 2 * var(--space-m));
+  padding: var(--space-m);
+  border: 0;
+  border-radius: var(--radius);
+  color: var(--color-text);
+  background: var(--color-page-bg);
+}
+
+#promotion-dialog::backdrop {
+  background: var(--color-backdrop);
+}
+
+.promotion-title {
+  margin: 0 0 var(--space-s);
+  font-size: 1.125rem;
+  text-align: center;
+}
+
+.promotion-choices {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, var(--promotion-choice-size)));
+  gap: var(--space-s);
+  justify-content: center;
+}
+
+.promotion-choice {
+  min-width: 0;
+  aspect-ratio: 1;
+  padding: var(--space-xs);
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-square-light);
+  cursor: pointer;
+}
+
+.promotion-choice:hover {
+  background: var(--color-square-dark);
+}
+
+.promotion-choice img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.promotion-cancel {
+  display: block;
+  margin: var(--space-m) auto 0;
+  padding: var(--space-xs) var(--space-m);
+  font: inherit;
+}
