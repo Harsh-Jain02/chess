@@ -23,7 +23,7 @@ Answer these before starting the linked task: write the answer after the questio
 
 - [x] O1 git init, first commit, create public GitHub repo, push · *do first*
 - [x] O2 Add chess.js 1.4.0 to `vendor/` · *before T04*
-- [ ] O3 Add piece SVGs to `assets/pieces/` · *before T08*
+- [x] O3 Add piece SVGs to `assets/pieces/` · *before T08*
 - [ ] O4 Turn on GitHub Pages (source: GitHub Actions) · *after T03*
 - [ ] O5 Decide the project license · *not blocking*
 
@@ -42,7 +42,7 @@ Answer these before starting the linked task: write the answer after the questio
 
 ## Phase 3: playable board
 
-- [ ] [T08](docs/tasks/T08-board-render.md) Draw the board and pieces · deps: O3, T02, T04
+- [x] [T08](docs/tasks/T08-board-render.md) Draw the board and pieces · deps: O3, T02, T04
 - [ ] [T09](docs/tasks/T09-selection-logic.md) Click-to-move logic (pure) · deps: T05
 - [ ] [T10](docs/tasks/T10-wire-moves.md) Wire clicks to moves · deps: T06, T08, T09
 - [ ] [T11](docs/tasks/T11-highlights.md) Move guidance highlights · deps: T10
