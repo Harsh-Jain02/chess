@@ -1,11 +1,13 @@
 // App state and event handlers: turns clicks on the board into moves (asking which
-// piece a pawn promotes to), then redraws the board with its move highlights and the
-// status line. Later tasks add the buttons (T14, T15), captured pieces (T16) and
-// saving (T18).
+// piece a pawn promotes to), handles the New game and Flip board buttons, then redraws
+// the board with its move highlights, the status line and the buttons. Later tasks add
+// Undo (T15), captured pieces (T16) and saving (T18).
 
+import { createGame } from './engine/game.js';
 import { getStatus } from './engine/status.js';
 import { cancelPromotion, choosePromotion, clickSquare, emptySelection } from './state/selection.js';
 import { renderBoard } from './ui/board-view.js';
+import { bindControls, renderControls } from './ui/controls.js';
 import { askPromotion } from './ui/promotion-dialog.js';
 import { renderStatus } from './ui/status-view.js';
 
@@ -32,11 +34,12 @@ import { renderStatus } from './ui/status-view.js';
  */
 
 /**
- * Listens for clicks on the board and plays the moves they make. Draws nothing
- * until `render` is called.
+ * Listens for clicks on the board and the buttons, and plays the moves they make.
+ * Draws nothing until `render` is called.
  * @param {object} options
  * @param {Elements} options.elements
- * @param {Game} options.game the game to play on; the controller moves it
+ * @param {Game} options.game the game to start with; the controller moves it, and New
+ *   game replaces it
  * @param {Color} options.orientation the color at the bottom of the board
  * @returns {Controller}
  */
@@ -55,6 +58,7 @@ export function createController({ elements, game, orientation }) {
       checkSquare: status.checkSquare,
     });
     renderStatus(elements.status, status);
+    renderControls(elements.controls, {});
   }
 
   /** @param {Square} square */
@@ -80,11 +84,30 @@ export function createController({ elements, game, orientation }) {
     return { selection: cancelPromotion(selection), move: null };
   }
 
+  /**
+   * Starts over from the start position, keeping the orientation. Asks first if that
+   * would throw away a game in progress; a finished game goes without asking (TODO Q1).
+   */
+  function onNewGame() {
+    const inProgress = state.game.moveList().length > 0 && !getStatus(state.game).isOver;
+    if (inProgress && !window.confirm('Start a new game? The current game will be lost.')) return;
+    state.game = createGame();
+    state.selection = emptySelection;
+    render();
+  }
+
+  /** Turns the board around. The selection stays: it names squares, not screen spots. */
+  function onFlip() {
+    state.orientation = state.orientation === 'w' ? 'b' : 'w';
+    render();
+  }
+
   // One listener for all 64 squares: they are redrawn on every render.
   elements.board.addEventListener('click', (event) => {
     const squareEl = event.target.closest('[data-square]');
     if (squareEl) onSquareClick(squareEl.dataset.square);
   });
+  bindControls(elements.controls, { onNewGame, onFlip });
 
   return { render };
 }

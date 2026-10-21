@@ -43,7 +43,7 @@ Layout: wide screens put the board on the left and the status, controls and capt
 | `js/ui/square-classes.js` | `isLightSquare` (moved from board-view.js), `squareClasses` | T08, T11 |
 | `js/ui/promotion-dialog.js` | `promotionChoices`, `askPromotion` | T12 |
 | `js/ui/status-view.js` | `statusText`, `renderStatus` | T13 |
-| `js/ui/controls.js` | `renderControls`, `bindControls` | T14, T15 |
+| `js/ui/controls.js` | `controlButtons`, `renderControls`, `bindControls` | T14, T15 |
 | `js/ui/captured-view.js` | `renderCaptured` | T16 |
 | `js/controller.js` | `createController` | T10 (extended by T11–T18) |
 | `js/main.js` | nothing (entry point) | T02, T10, T18 |

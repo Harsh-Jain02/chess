@@ -5,6 +5,29 @@
   font-weight: bold;
 }
 
+/* New game and Flip board (Undo joins in T15): one row, which wraps if the panel is narrow. */
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+}
+
+.control-button {
+  flex: 1 1 auto;
+  min-height: var(--button-min-height);
+  padding: var(--space-xs) var(--space-m);
+  border: 0;
+  border-radius: var(--radius);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-square-light);
+  cursor: pointer;
+}
+
+.control-button:hover {
+  background: var(--color-square-dark);
+}
+
 /*
  * Promotion dialog: four piece buttons in a row, then Cancel. The dialog is never wider
  * than the screen minus a margin, and the buttons shrink to fit, down to a 320px screen.
