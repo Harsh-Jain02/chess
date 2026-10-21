@@ -2,7 +2,7 @@
 
 Our own code has no license yet (all rights reserved); see the README.
 
-Third-party files keep their own licenses. Their folders are added by the owner (tasks O2 and O3 in `docs/tasks/owner-tasks.md`). Until then they don't exist in the repo.
+Third-party files keep their own licenses.
 
 ## chess.js 1.4.0
 

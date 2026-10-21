@@ -4,17 +4,27 @@ A chess game in the browser for two people sharing one device. Players take turn
 
 It's a static website (plain HTML, CSS and JavaScript, no build step) hosted on GitHub Pages. The chess rules come from [chess.js](https://github.com/jhlywa/chess.js).
 
-> **Status:** project set up, development not started. Progress is tracked in [TODO.md](TODO.md).
+**Live site:** `https://<user>.github.io/<repo>/`
 
-## Planned features (v1)
+## How to play
 
-- Only legal moves can be played. Click a piece to see where it can go: dots for moves, rings for captures.
-- Check, checkmate and stalemate are detected, and so are draws by threefold repetition, the 50-move rule and insufficient material.
-- Pawn promotion: choose a queen, rook, bishop or knight.
-- New game, flip board, undo last move.
-- Captured pieces shown for each side.
-- The game survives a page refresh (saved in your browser).
-- Works on desktop and mobile.
+White moves first, then the players take turns using the same screen. Select one of
+your pieces to show its legal destinations: a dot marks an empty square and a ring
+marks a piece you can capture. Select a highlighted square to make the move, or
+select another of your pieces to change your choice.
+
+When a pawn reaches the other end of the board, choose whether to promote it to a
+queen, rook, bishop or knight. The status above the board shows whose turn it is,
+warns when a king is in check, and announces checkmate, stalemate or another draw
+when the game ends.
+
+Use **Undo** to take back the latest move during an active game. **New game** starts
+again from the initial position, and **Flip board** rotates the board so either
+player's pieces can appear closest to them. Captured pieces are shown beside the
+board.
+
+Your moves and board orientation are saved automatically in this browser, so a page
+refresh continues the same game.
 
 ## Run it locally
 

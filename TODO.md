@@ -60,7 +60,7 @@ Answer these before starting the linked task: write the answer after the questio
 ## Phase 5: release
 
 - [x] [T19](docs/tasks/T19-responsive.md) Mobile and responsive pass · deps: T12–T18
-- [ ] [T20](docs/tasks/T20-credits-howto.md) On-page credits + README "How to play" · deps: T19
+- [x] [T20](docs/tasks/T20-credits-howto.md) On-page credits + README "How to play" · deps: T19
 - [ ] [T21](docs/tasks/T21-qa-checklist.md) QA checklist with verified move sequences · deps: T18
 - [ ] O6 Owner runs `docs/QA.md` in a desktop and a phone browser, then ships · deps: T19–T21
 
