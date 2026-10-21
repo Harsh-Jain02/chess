@@ -2,7 +2,8 @@
 // elements, create the game and start the controller.
 
 import { createController } from './controller.js';
-import { createGame } from './engine/game.js';
+import { createGame, replayGame } from './engine/game.js';
+import { clearGame, getBrowserStorage, loadGame } from './state/storage.js';
 
 /**
  * @param {string} id
@@ -14,6 +15,11 @@ function byId(id) {
   return element;
 }
 
+const storage = getBrowserStorage();
+const saved = loadGame(storage);
+const restoredGame = saved ? replayGame(saved.moves) : null;
+if (!restoredGame) clearGame(storage);
+
 const controller = createController({
   elements: {
     status: byId('status'),
@@ -23,7 +29,8 @@ const controller = createController({
     controls: byId('controls'),
     promotionDialog: byId('promotion-dialog'),
   },
-  game: createGame(),
-  orientation: 'w',
+  game: restoredGame ?? createGame(),
+  orientation: restoredGame && saved ? saved.orientation : 'w',
+  storage,
 });
 controller.render();

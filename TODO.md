@@ -17,7 +17,7 @@ Answer these before starting the linked task: write the answer after the questio
 - Q1 (T14): Ask for confirmation before "New game" when at least one move has been played? *Recommended: yes.* **Answer: yes, but don't ask once the game is over (checkmate or a draw).**
 - Q2 (T15): Allow Undo after checkmate or a draw? (It would re-open the game.) *Recommended: yes.* **Answer: no.**
 - Q3 (T15): Does one Undo click take back one move (one player's move)? *Recommended: yes.* **Answer: yes.**
-- Q4 (T18): Remember board orientation (flipped or not) across a page refresh? *Recommended: yes.*
+- Q4 (T18): Remember board orientation (flipped or not) across a page refresh? *Recommended: yes.* **Answer: yes.**
 
 ## Phase 0: owner setup ([owner-tasks.md](docs/tasks/owner-tasks.md))
 
@@ -55,7 +55,7 @@ Answer these before starting the linked task: write the answer after the questio
 - [x] [T15](docs/tasks/T15-undo.md) Undo button · deps: T14
 - [x] [T16](docs/tasks/T16-captured-view.md) Captured pieces display · deps: T07, T10
 - [x] [T17](docs/tasks/T17-storage.md) Save/load module (pure) · deps: T01
-- [ ] [T18](docs/tasks/T18-persistence.md) ⚠ Survive page refresh · deps: T05, T15, T17
+- [x] [T18](docs/tasks/T18-persistence.md) Survive page refresh · deps: T05, T15, T17
 
 ## Phase 5: release
 

@@ -1,12 +1,13 @@
 // App state and event handlers: turns clicks on the board into moves (asking which
 // piece a pawn promotes to), handles the New game, Undo and Flip board buttons, then
 // redraws the board with its move highlights, the status line, captured pieces and
-// buttons. A later task adds saving (T18).
+// buttons. Game moves and board orientation are saved after every change.
 
 import { getCaptured } from './engine/captures.js';
 import { createGame } from './engine/game.js';
 import { getStatus } from './engine/status.js';
 import { cancelPromotion, choosePromotion, clickSquare, emptySelection } from './state/selection.js';
+import { saveGame } from './state/storage.js';
 import { renderBoard } from './ui/board-view.js';
 import { renderCaptured } from './ui/captured-view.js';
 import { bindControls, renderControls } from './ui/controls.js';
@@ -43,11 +44,24 @@ import { renderStatus } from './ui/status-view.js';
  * @param {Game} options.game the game to start with; the controller moves it, and New
  *   game replaces it
  * @param {Color} options.orientation the color at the bottom of the board
+ * @param {Storage | null} options.storage persistence supplied by main.js
  * @returns {Controller}
  */
-export function createController({ elements, game, orientation }) {
+export function createController({ elements, game, orientation, storage }) {
   /** @type {{ game: Game, selection: Selection, orientation: Color }} */
   const state = { game, selection: emptySelection, orientation };
+  let warnedSaveFailure = false;
+
+  function save() {
+    const didSave = saveGame(storage, {
+      moves: state.game.moveList(),
+      orientation: state.orientation,
+    });
+    if (!didSave && !warnedSaveFailure) {
+      console.warn('Could not save the game; play can continue without persistence.');
+      warnedSaveFailure = true;
+    }
+  }
 
   function render() {
     const { selected, targets } = state.selection;
@@ -84,7 +98,10 @@ export function createController({ elements, game, orientation }) {
     if (result.selection.pendingPromotion) result = await completePromotion(result.selection);
     state.selection = result.selection;
     const { move } = result;
-    if (move && !state.game.move(move)) console.warn('Move refused by the engine:', move);
+    if (move) {
+      if (state.game.move(move)) save();
+      else console.warn('Move refused by the engine:', move);
+    }
     render();
   }
 
@@ -109,6 +126,7 @@ export function createController({ elements, game, orientation }) {
     if (inProgress && !window.confirm('Start a new game? The current game will be lost.')) return;
     state.game = createGame();
     state.selection = emptySelection;
+    save();
     render();
   }
 
@@ -117,12 +135,14 @@ export function createController({ elements, game, orientation }) {
     if (state.game.history().length === 0 || getStatus(state.game).isOver) return;
     state.game.undo();
     state.selection = emptySelection;
+    save();
     render();
   }
 
   /** Turns the board around. The selection stays: it names squares, not screen spots. */
   function onFlip() {
     state.orientation = state.orientation === 'w' ? 'b' : 'w';
+    save();
     render();
   }
 
