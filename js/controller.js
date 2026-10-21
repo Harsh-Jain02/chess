@@ -1,12 +1,14 @@
 // App state and event handlers: turns clicks on the board into moves (asking which
 // piece a pawn promotes to), handles the New game, Undo and Flip board buttons, then
-// redraws the board with its move highlights, the status line and the buttons. Later
-// tasks add captured pieces (T16) and saving (T18).
+// redraws the board with its move highlights, the status line, captured pieces and
+// buttons. A later task adds saving (T18).
 
+import { getCaptured } from './engine/captures.js';
 import { createGame } from './engine/game.js';
 import { getStatus } from './engine/status.js';
 import { cancelPromotion, choosePromotion, clickSquare, emptySelection } from './state/selection.js';
 import { renderBoard } from './ui/board-view.js';
+import { renderCaptured } from './ui/captured-view.js';
 import { bindControls, renderControls } from './ui/controls.js';
 import { askPromotion } from './ui/promotion-dialog.js';
 import { renderStatus } from './ui/status-view.js';
@@ -50,6 +52,8 @@ export function createController({ elements, game, orientation }) {
   function render() {
     const { selected, targets } = state.selection;
     const status = getStatus(state.game);
+    const history = state.game.history();
+    const captured = getCaptured(history);
     renderBoard(elements.board, {
       game: state.game,
       orientation: state.orientation,
@@ -58,8 +62,18 @@ export function createController({ elements, game, orientation }) {
       checkSquare: status.checkSquare,
     });
     renderStatus(elements.status, status);
+    renderCaptured(
+      elements.capturedByW,
+      'White captured',
+      captured.w.map((type) => ({ color: 'b', type })),
+    );
+    renderCaptured(
+      elements.capturedByB,
+      'Black captured',
+      captured.b.map((type) => ({ color: 'w', type })),
+    );
     renderControls(elements.controls, {
-      canUndo: state.game.history().length > 0 && !status.isOver,
+      canUndo: history.length > 0 && !status.isOver,
     });
   }
 

@@ -5,6 +5,27 @@
   font-weight: bold;
 }
 
+/* Each label gets a row; the piece images wrap below it on narrow screens. */
+#captured-by-w,
+#captured-by-b {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.captured-label {
+  flex: 0 0 100%;
+  font-weight: bold;
+}
+
+.captured-piece {
+  display: block;
+  width: var(--captured-piece-size);
+  height: var(--captured-piece-size);
+}
+
 /* New game and Flip board (Undo joins in T15): one row, which wraps if the panel is narrow. */
 #controls {
   display: flex;

@@ -53,7 +53,7 @@ Answer these before starting the linked task: write the answer after the questio
 
 - [x] [T14](docs/tasks/T14-new-game-flip.md) New game + flip board buttons · deps: T13
 - [x] [T15](docs/tasks/T15-undo.md) Undo button · deps: T14
-- [ ] [T16](docs/tasks/T16-captured-view.md) Captured pieces display · deps: T07, T10
+- [x] [T16](docs/tasks/T16-captured-view.md) Captured pieces display · deps: T07, T10
 - [ ] [T17](docs/tasks/T17-storage.md) Save/load module (pure) · deps: T01
 - [ ] [T18](docs/tasks/T18-persistence.md) ⚠ Survive page refresh · deps: T05, T15, T17
 
