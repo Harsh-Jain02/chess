@@ -1,6 +1,6 @@
-// App state and event handlers: turns clicks on the board into moves, then redraws.
-// Later tasks add highlights (T11), the promotion dialog (T12), the status line (T13),
-// the buttons (T14, T15), captured pieces (T16) and saving (T18).
+// App state and event handlers: turns clicks on the board into moves, then redraws
+// the board with its move highlights. Later tasks add the promotion dialog (T12), the
+// status line (T13), the buttons (T14, T15), captured pieces (T16) and saving (T18).
 
 import { getStatus } from './engine/status.js';
 import { clickSquare, emptySelection } from './state/selection.js';

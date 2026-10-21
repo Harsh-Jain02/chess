@@ -39,8 +39,8 @@ Layout: wide screens put the board on the left and the status, controls and capt
 | `js/state/selection.js` | `emptySelection`, `clickSquare`, `choosePromotion`, `cancelPromotion` | T09 |
 | `js/state/storage.js` | `STORAGE_KEY`, `getBrowserStorage`, `saveGame`, `loadGame`, `clearGame` | T17 |
 | `js/ui/pieces.js` | `pieceImageUrl`, `pieceName` | T08 |
-| `js/ui/board-view.js` | `squareOrder`, `isLightSquare`, `renderBoard` | T08 |
-| `js/ui/square-classes.js` | `squareClasses` | T11 |
+| `js/ui/board-view.js` | `squareOrder`, `renderBoard` | T08 |
+| `js/ui/square-classes.js` | `isLightSquare` (moved from board-view.js), `squareClasses` | T08, T11 |
 | `js/ui/promotion-dialog.js` | `askPromotion` | T12 |
 | `js/ui/status-view.js` | `statusText`, `renderStatus` | T13 |
 | `js/ui/controls.js` | `renderControls`, `bindControls` | T14, T15 |

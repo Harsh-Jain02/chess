@@ -53,3 +53,38 @@
   right: 6%;
   bottom: 4%;
 }
+
+/*
+ * Move guidance (T11). Each highlight has its own shape, not only its own color:
+ * a tinted square, a dot, a ring and a glow. The ring and the glow use ::before,
+ * which is drawn under the coordinates and the piece, so the piece stays visible.
+ */
+.square.is-selected {
+  background-image: linear-gradient(var(--color-selected), var(--color-selected));
+}
+
+/* A plain move: a dot in the middle of the (always empty) square. */
+.square.is-target::after {
+  content: "";
+  position: absolute;
+  inset: calc((100% - var(--target-dot-size)) / 2);
+  border-radius: 50%;
+  background: var(--color-target);
+}
+
+/* A capture: a ring along the square's edge, around the piece to be captured. */
+.square.is-capture-target::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: var(--capture-ring-width) solid var(--color-target);
+  border-radius: 50%;
+}
+
+/* A king in check: a red glow behind it. It also shows over the selected tint. */
+.square.is-check::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle closest-side, var(--color-check) 30%, transparent);
+}

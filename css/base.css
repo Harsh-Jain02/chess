@@ -7,6 +7,9 @@
   --color-placeholder: #9a948a;
   --color-square-light: #f0d9b5;
   --color-square-dark: #b58863;
+  --color-selected: rgb(20 85 30 / 50%); /* tint over the selected piece's square */
+  --color-target: rgb(20 85 30 / 50%); /* move dots and capture rings */
+  --color-check: rgb(230 0 0); /* glow behind a king in check */
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -21,6 +24,8 @@
   --region-min-height: 2.5rem;
   --piece-size: 90%; /* of a square */
   --coord-font-size: clamp(0.55rem, 2.6cqi, 0.85rem); /* cqi: % of the board width */
+  --target-dot-size: 30%; /* of a square */
+  --capture-ring-width: 1cqi; /* about 8% of a square */
 
   --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }

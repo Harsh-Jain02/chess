@@ -4,7 +4,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isLightSquare, squareOrder } from '../../js/ui/board-view.js';
+import { squareOrder } from '../../js/ui/board-view.js';
 
 const SQUARE = /^[a-h][1-8]$/;
 
@@ -41,25 +41,4 @@ test('squareOrder: left column and bottom row, where the coordinates go', () => 
   assert.deepEqual(bottom(squareOrder('w')), ['a1', 'b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1']);
   assert.deepEqual(left(squareOrder('b')), ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8']);
   assert.deepEqual(bottom(squareOrder('b')), ['h8', 'g8', 'f8', 'e8', 'd8', 'c8', 'b8', 'a8']);
-});
-
-test('isLightSquare: a1 and h8 are dark, h1 and a8 are light', () => {
-  assert.equal(isLightSquare('a1'), false);
-  assert.equal(isLightSquare('h8'), false);
-  assert.equal(isLightSquare('h1'), true);
-  assert.equal(isLightSquare('a8'), true);
-});
-
-test('isLightSquare: the queens start on their own color (d1 light, d8 dark)', () => {
-  assert.equal(isLightSquare('d1'), true);
-  assert.equal(isLightSquare('d8'), false);
-});
-
-test('isLightSquare: neighbours differ and half the board is light', () => {
-  const order = squareOrder('w');
-  for (let index = 0; index < 63; index += 1) {
-    if (index % 8 !== 7) assert.notEqual(isLightSquare(order[index]), isLightSquare(order[index + 1]));
-    if (index < 56) assert.notEqual(isLightSquare(order[index]), isLightSquare(order[index + 8]));
-  }
-  assert.equal(order.filter(isLightSquare).length, 32);
 });

@@ -45,7 +45,7 @@ Answer these before starting the linked task: write the answer after the questio
 - [x] [T08](docs/tasks/T08-board-render.md) Draw the board and pieces · deps: O3, T02, T04
 - [x] [T09](docs/tasks/T09-selection-logic.md) Click-to-move logic (pure) · deps: T05
 - [x] [T10](docs/tasks/T10-wire-moves.md) Wire clicks to moves · deps: T06, T08, T09
-- [ ] [T11](docs/tasks/T11-highlights.md) Move guidance highlights · deps: T10
+- [x] [T11](docs/tasks/T11-highlights.md) Move guidance highlights · deps: T10
 - [ ] [T12](docs/tasks/T12-promotion-dialog.md) Promotion dialog · deps: T11
 - [ ] [T13](docs/tasks/T13-status-view.md) Status line and game over · deps: T10
 
