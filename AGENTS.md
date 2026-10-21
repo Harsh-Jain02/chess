@@ -18,7 +18,7 @@ Two-player chess on one screen in the browser (pass-and-play). Only legal moves 
 
 Rules 1–2 are the owner's rules for AI agents. Human contributors follow the owner's normal git workflow.
 
-## Commands (they exist once task T01 is done)
+## Commands
 
 | Command | What it does |
 |---|---|
@@ -30,8 +30,6 @@ Rules 1–2 are the owner's rules for AI agents. Human contributors follow the o
 Browsers refuse to load ES modules from `file://`, so always use a local server to try the page. Node.js 24+ is required for the tests.
 
 ## Where things are
-
-Most of these don't exist yet; the tasks create them.
 
 ```
 index.html            page shell, element ids are a contract (see ARCHITECTURE)
@@ -48,6 +46,7 @@ tests/                unit tests; mirrors js/
 scripts/              dev scripts (file-size check)
 docs/ARCHITECTURE.md  modules, contracts, data shapes, chess.js API summary
 docs/DECISIONS.md     decision log; read before proposing a different approach
+docs/QA.md            manual release checklist; its move sequences are proven in tests/qa/
 docs/tasks/           one file per task, owner-tasks.md, _TEMPLATE.md
 TODO.md               task board and open questions
 CREDITS.md            third-party licenses and attribution

@@ -1,6 +1,6 @@
 # Architecture
 
-How the code is organised and the contracts between modules. Most modules don't exist yet; the **Task** column says which task creates each one. If you change an exported function, update its row here in the same task.
+How the code is organised and the contracts between modules. The **Task** column says which task created each one. If you change an exported function, update its row here in the same task.
 
 ## Layers
 

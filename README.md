@@ -4,7 +4,7 @@ A chess game in the browser for two people sharing one device. Players take turn
 
 It's a static website (plain HTML, CSS and JavaScript, no build step) hosted on GitHub Pages. The chess rules come from [chess.js](https://github.com/jhlywa/chess.js).
 
-**Live site:** `https://<user>.github.io/<repo>/`
+**Live site:** https://harsh-jain02.github.io/chess/
 
 ## How to play
 
