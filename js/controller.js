@@ -1,7 +1,7 @@
 // App state and event handlers: turns clicks on the board into moves (asking which
-// piece a pawn promotes to), handles the New game and Flip board buttons, then redraws
-// the board with its move highlights, the status line and the buttons. Later tasks add
-// Undo (T15), captured pieces (T16) and saving (T18).
+// piece a pawn promotes to), handles the New game, Undo and Flip board buttons, then
+// redraws the board with its move highlights, the status line and the buttons. Later
+// tasks add captured pieces (T16) and saving (T18).
 
 import { createGame } from './engine/game.js';
 import { getStatus } from './engine/status.js';
@@ -58,7 +58,9 @@ export function createController({ elements, game, orientation }) {
       checkSquare: status.checkSquare,
     });
     renderStatus(elements.status, status);
-    renderControls(elements.controls, {});
+    renderControls(elements.controls, {
+      canUndo: state.game.history().length > 0 && !status.isOver,
+    });
   }
 
   /** @param {Square} square */
@@ -96,6 +98,14 @@ export function createController({ elements, game, orientation }) {
     render();
   }
 
+  /** Takes back one player's move, unless the game is over. */
+  function onUndo() {
+    if (state.game.history().length === 0 || getStatus(state.game).isOver) return;
+    state.game.undo();
+    state.selection = emptySelection;
+    render();
+  }
+
   /** Turns the board around. The selection stays: it names squares, not screen spots. */
   function onFlip() {
     state.orientation = state.orientation === 'w' ? 'b' : 'w';
@@ -107,7 +117,7 @@ export function createController({ elements, game, orientation }) {
     const squareEl = event.target.closest('[data-square]');
     if (squareEl) onSquareClick(squareEl.dataset.square);
   });
-  bindControls(elements.controls, { onNewGame, onFlip });
+  bindControls(elements.controls, { onNewGame, onUndo, onFlip });
 
   return { render };
 }

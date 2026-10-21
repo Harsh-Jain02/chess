@@ -1,4 +1,4 @@
-// Tests for controls.js (T14). renderControls needs a DOM, so it is checked in the
+// Tests for controls.js. renderControls needs a DOM, so it is checked in the
 // browser. bindControls only needs addEventListener and closest(), so it is checked
 // here with two small stand-ins. Importing the module also shows that it doesn't touch
 // `document` at import time (Node has none).
@@ -24,12 +24,18 @@ const clickOn = (action) => ({
 /** Handlers that record which ones were called, in order. */
 function recordingHandlers() {
   const calls = [];
-  return { calls, onNewGame: () => calls.push('onNewGame'), onFlip: () => calls.push('onFlip') };
+  return {
+    calls,
+    onNewGame: () => calls.push('onNewGame'),
+    onUndo: () => calls.push('onUndo'),
+    onFlip: () => calls.push('onFlip'),
+  };
 }
 
-test('controlButtons: New game, then Flip board', () => {
+test('controlButtons: New game, Undo, then Flip board', () => {
   assert.deepEqual(controlButtons().map(({ action, label }) => [action, label]), [
     ['new-game', 'New game'],
+    ['undo', 'Undo'],
     ['flip', 'Flip board'],
   ]);
 });
@@ -37,6 +43,7 @@ test('controlButtons: New game, then Flip board', () => {
 test('controlButtons: each action calls its own handler', () => {
   assert.deepEqual(controlButtons().map(({ action, handler }) => [action, handler]), [
     ['new-game', 'onNewGame'],
+    ['undo', 'onUndo'],
     ['flip', 'onFlip'],
   ]);
 });
@@ -53,9 +60,10 @@ test('bindControls: a click calls the handler of the button clicked', () => {
   bindControls(controls, handlers);
   const [{ listener }] = controls.listeners;
   listener(clickOn('flip'));
+  listener(clickOn('undo'));
   listener(clickOn('new-game'));
   listener(clickOn('flip'));
-  assert.deepEqual(handlers.calls, ['onFlip', 'onNewGame', 'onFlip']);
+  assert.deepEqual(handlers.calls, ['onFlip', 'onUndo', 'onNewGame', 'onFlip']);
 });
 
 test('bindControls: clicks between buttons or on an unknown action do nothing', () => {
@@ -64,6 +72,6 @@ test('bindControls: clicks between buttons or on an unknown action do nothing', 
   bindControls(controls, handlers);
   const [{ listener }] = controls.listeners;
   listener(clickOn(null));
-  listener(clickOn('undo')); // T15 adds this button; until then it isn't one of ours
+  listener(clickOn('settings'));
   assert.deepEqual(handlers.calls, []);
 });

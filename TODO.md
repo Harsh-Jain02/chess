@@ -15,8 +15,8 @@ The agent ticks `[x]` when the acceptance criteria pass. The owner reviews the d
 Answer these before starting the linked task: write the answer after the question and remove the ⚠ from the task line.
 
 - Q1 (T14): Ask for confirmation before "New game" when at least one move has been played? *Recommended: yes.* **Answer: yes, but don't ask once the game is over (checkmate or a draw).**
-- Q2 (T15): Allow Undo after checkmate or a draw? (It would re-open the game.) *Recommended: yes.*
-- Q3 (T15): Does one Undo click take back one move (one player's move)? *Recommended: yes.*
+- Q2 (T15): Allow Undo after checkmate or a draw? (It would re-open the game.) *Recommended: yes.* **Answer: no.**
+- Q3 (T15): Does one Undo click take back one move (one player's move)? *Recommended: yes.* **Answer: yes.**
 - Q4 (T18): Remember board orientation (flipped or not) across a page refresh? *Recommended: yes.*
 
 ## Phase 0: owner setup ([owner-tasks.md](docs/tasks/owner-tasks.md))
@@ -52,7 +52,7 @@ Answer these before starting the linked task: write the answer after the questio
 ## Phase 4: controls and features
 
 - [x] [T14](docs/tasks/T14-new-game-flip.md) New game + flip board buttons · deps: T13
-- [ ] [T15](docs/tasks/T15-undo.md) ⚠ Undo button · deps: T14
+- [x] [T15](docs/tasks/T15-undo.md) Undo button · deps: T14
 - [ ] [T16](docs/tasks/T16-captured-view.md) Captured pieces display · deps: T07, T10
 - [ ] [T17](docs/tasks/T17-storage.md) Save/load module (pure) · deps: T01
 - [ ] [T18](docs/tasks/T18-persistence.md) ⚠ Survive page refresh · deps: T05, T15, T17
