@@ -50,6 +50,30 @@
   background: var(--color-square-dark);
 }
 
+.history-title {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: 0 0 var(--space-s);
+  font-size: 1rem;
+  background: var(--color-page-bg);
+}
+
+.history-list {
+  margin: 0;
+  padding-inline-start: var(--space-l);
+}
+
+.history-list > li {
+  padding-inline-start: var(--space-xs);
+}
+
+.history-moves {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-m);
+}
+
 /*
  * Promotion dialog: four piece buttons in a row, then Cancel. The dialog is never wider
  * than the screen minus a margin, and the buttons shrink to fit, down to a 320px screen.

@@ -24,15 +24,15 @@ index.html
 
 ## Page elements (contract between `index.html` and JS)
 
-`#status` · `#board` · `#captured-by-w` · `#captured-by-b` · `#controls` · `#promotion-dialog` (a `<dialog>`) · `#credits` (footer)
+`#status` · `#board` · `#captured-by-w` · `#captured-by-b` · `#controls` · `#history` · `#promotion-dialog` (a `<dialog>`) · `#credits` (footer)
 
-Layout: wide screens put the board on the left and the status, controls and captured pieces on the right. Narrow screens (< 700px) stack them: status, board, captured pieces, controls.
+Layout: wide screens put the board on the left and the status, captured pieces, controls and move history on the right. Narrow screens (< 700px) stack them in that order after the board; move history has a limited, scrollable height.
 
 ## Module map
 
 | File | Exports | Task |
 |---|---|---|
-| `js/types.js` | JSDoc `@typedef`s only (see Data shapes) | T04 |
+| `js/types.js` | JSDoc `@typedef`s only (see Data shapes) | T04, B01 |
 | `js/engine/game.js` | `createGame`, `replayGame` | T04, T05 |
 | `js/engine/status.js` | `getStatus` | T06 |
 | `js/engine/captures.js` | `getCaptured` | T07 |
@@ -45,9 +45,10 @@ Layout: wide screens put the board on the left and the status, controls and capt
 | `js/ui/status-view.js` | `statusText`, `renderStatus` | T13 |
 | `js/ui/controls.js` | `controlButtons`, `renderControls`, `bindControls` | T14, T15 |
 | `js/ui/captured-view.js` | `renderCaptured` | T16 |
-| `js/controller.js` | `createController` | T10 (extended by T11–T18) |
-| `js/main.js` | nothing (entry point) | T02, T10, T18 |
-| `css/base.css` · `css/board.css` · `css/controls.css` | tokens + layout · board · panel, buttons, dialog | T02, T08, T11, T12 |
+| `js/ui/history-view.js` | `formatMoveRows`, `renderHistory` | B01 |
+| `js/controller.js` | `createController` | T10 (extended by T11–T18, B01) |
+| `js/main.js` | nothing (entry point) | T02, T10, T18, B01 |
+| `css/base.css` · `css/board.css` · `css/controls.css` | tokens + layout · board · panel, buttons, history, dialog | T02, T08, T11, T12, B01 |
 | `scripts/check-file-size.js` | `countLines`, `isChecked` + CLI | T01 |
 
 ## Data shapes
@@ -61,6 +62,7 @@ Target      { to: Square, isCapture: boolean, isPromotion: boolean }
 MoveInput   { from: Square, to: Square, promotion?: 'q' | 'r' | 'b' | 'n' }
 MoveRecord  { color, piece: PieceType, from, to, captured?: PieceType,
               promotion?: PieceType, san: string, lan: string }      // plain object
+MoveRow     { number: number, white: string, black: string }         // SAN by turn
 Flags       { inCheck, checkmate, stalemate, threefold, fiftyMoves,
               insufficientMaterial }                                  // booleans
 Status      { turn: Color, inCheck: boolean, checkSquare: Square | null,

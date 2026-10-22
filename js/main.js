@@ -27,6 +27,7 @@ const controller = createController({
     capturedByW: byId('captured-by-w'),
     capturedByB: byId('captured-by-b'),
     controls: byId('controls'),
+    history: byId('history'),
     promotionDialog: byId('promotion-dialog'),
   },
   game: restoredGame ?? createGame(),

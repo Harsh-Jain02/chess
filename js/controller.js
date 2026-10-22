@@ -1,7 +1,8 @@
 // App state and event handlers: turns clicks on the board into moves (asking which
 // piece a pawn promotes to), handles the New game, Undo and Flip board buttons, then
-// redraws the board with its move highlights, the status line, captured pieces and
-// buttons. Game moves and board orientation are saved after every change.
+// redraws the board with its move highlights, the status line, captured pieces,
+// buttons and move history. Game moves and board orientation are saved after every
+// change.
 
 import { getCaptured } from './engine/captures.js';
 import { createGame } from './engine/game.js';
@@ -11,6 +12,7 @@ import { saveGame } from './state/storage.js';
 import { renderBoard } from './ui/board-view.js';
 import { renderCaptured } from './ui/captured-view.js';
 import { bindControls, renderControls } from './ui/controls.js';
+import { formatMoveRows, renderHistory } from './ui/history-view.js';
 import { askPromotion } from './ui/promotion-dialog.js';
 import { renderStatus } from './ui/status-view.js';
 
@@ -28,6 +30,7 @@ import { renderStatus } from './ui/status-view.js';
  * @property {HTMLElement} capturedByW #captured-by-w
  * @property {HTMLElement} capturedByB #captured-by-b
  * @property {HTMLElement} controls #controls
+ * @property {HTMLElement} history #history
  * @property {HTMLDialogElement} promotionDialog #promotion-dialog
  */
 
@@ -89,6 +92,7 @@ export function createController({ elements, game, orientation, storage }) {
     renderControls(elements.controls, {
       canUndo: history.length > 0 && !status.isOver,
     });
+    renderHistory(elements.history, formatMoveRows(history));
   }
 
   /** @param {Square} square */

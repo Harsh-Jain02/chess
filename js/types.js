@@ -43,6 +43,14 @@
  */
 
 /**
+ * One numbered row in the move history.
+ * @typedef {object} MoveRow
+ * @property {number} number
+ * @property {string} white SAN for White's move
+ * @property {string} black SAN for Black's move, or '' if it has not been played
+ */
+
+/**
  * Check and game-over flags, straight from chess.js.
  * @typedef {object} Flags
  * @property {boolean} inCheck

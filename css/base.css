@@ -29,6 +29,7 @@
   --capture-ring-width: 1cqi; /* about 8% of a square */
   --promotion-choice-size: 4.5rem; /* the largest a piece button gets; smaller on narrow screens */
   --captured-piece-size: 1.75rem;
+  --history-max-height: 12rem;
   --radius: 0.5rem;
   --button-min-height: 44px; /* easy to tap on a touch screen */
 
@@ -65,7 +66,8 @@ h1 {
     "board"
     "captured-w"
     "captured-b"
-    "controls";
+    "controls"
+    "history";
   justify-content: center;
 }
 
@@ -73,12 +75,19 @@ h1 {
 #captured-by-w { grid-area: captured-w; }
 #captured-by-b { grid-area: captured-b; }
 #controls { grid-area: controls; }
+#history { grid-area: history; }
 
 #status,
 #captured-by-w,
 #captured-by-b,
-#controls {
+#controls,
+#history {
   min-height: var(--region-min-height);
+}
+
+#history {
+  max-height: var(--history-max-height);
+  overflow-y: auto;
 }
 
 #board {
@@ -102,14 +111,20 @@ h1 {
 
   .layout {
     grid-template-columns: minmax(0, var(--board-size)) minmax(var(--panel-min-width), 1fr);
-    grid-template-rows: auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto minmax(0, 1fr);
     grid-template-areas:
       "board status"
       "board captured-w"
       "board captured-b"
-      "board controls";
+      "board controls"
+      "board history";
     align-items: start;
     max-width: calc(var(--board-size) + var(--space-m) + var(--panel-max-width));
     margin-inline: auto;
+  }
+
+  #history {
+    min-height: 0;
+    max-height: none;
   }
 }

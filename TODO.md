@@ -66,7 +66,7 @@ Answer these before starting the linked task: write the answer after the questio
 
 ## Backlog (agreed, not scheduled)
 
-- [ ] [B01](docs/tasks/B01-move-history.md) Move history list (1. e4 e5 2. Nf3 …)
+- [x] [B01](docs/tasks/B01-move-history.md) Move history list (1. e4 e5 2. Nf3 …)
 
 ## Ideas (not planned; owner decides; no task files)
 
